@@ -1,0 +1,42 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse=TRUE, prompt=TRUE,comment=NULL,message=FALSE, include=TRUE, fig.height = 4, fig.width = 6)
+```
+
+#Daily Data test:
+```{r}
+library(dplyr)
+apple_data <- read.csv('data/apple_daily.csv')
+apple_data <- apple_data %>% 
+  select("Date", "Active.energy.burned.Cal.", "Basal.energy.burned.Cal.", "Distance.walking...running.mi.", "Resting.heart.rate.count.min.", "Walking.heart.rate.average.count.min.") %>% 
+  mutate(Date=as.Date(Date)) %>% 
+  rename(Active_cal = Active.energy.burned.Cal., Base_cal = Basal.energy.burned.Cal., Walk_dist = Distance.walking...running.mi., resting_heart_rate = Resting.heart.rate.count.min., walking_heart_rate = Walking.heart.rate.average.count.min.)
+head(apple_data)
+```
+```{r, warning=FALSE}
+library(ggplot2)
+ggplot(apple_data, aes(x=Date, y=Base_cal)) + geom_point() + geom_smooth(method = lm)
+```
+
+```{r, warning=FALSE}
+ggplot(apple_data, aes(x=Date, y=Active_cal)) + geom_point() + geom_smooth(method = lm)
+```
+
+```{r, warning=FALSE}
+ggplot(apple_data, aes(x=Date, y=Walk_dist)) + geom_point() + geom_smooth(method = lm)
+```
+
+```{r, warning=FALSE}
+ggplot(apple_data, aes(x=Date, y=resting_heart_rate)) + geom_point() + geom_smooth(method = lm)
+```
+
+```{r, warning=FALSE}
+ggplot(apple_data, aes(x=Date, y=walking_heart_rate)) + geom_point() + geom_smooth(method = lm)
+```
+
+
+
