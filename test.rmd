@@ -1,13 +1,13 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse=TRUE, prompt=TRUE,comment=NULL,message=FALSE, include=TRUE, fig.height = 4, fig.width = 6)
 ```
 
-#Daily Data test:
+# Daily Data test:
 ```{r}
 library(dplyr)
 apple_data <- read.csv('data/apple_daily.csv')
